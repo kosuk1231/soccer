@@ -169,6 +169,47 @@ footer{margin-top:18px;color:var(--dim);font-size:12.5px;text-align:center}
 body[data-view="men"] .tabbar button[aria-current="page"]::after{background:var(--men)}
 body[data-view="women"] .tabbar button[aria-current="page"]::after{background:var(--women)}
 .tabbar button:focus-visible{outline:2px solid #fff}
+
+/* ===== 점수 표시 ===== */
+.sched .vs i.score{color:#fff;font-weight:900;font-size:15px;background:rgba(255,255,255,.12);border-radius:7px;padding:1px 8px;letter-spacing:.02em}
+.sched .scorers{margin-top:5px;font-size:12.5px;color:var(--muted);display:grid;grid-template-columns:1fr 1fr;gap:4px 10px}
+.sched .scorers span{white-space:normal}
+.sched .scorers span::before{content:"⚽ ";font-size:11px}
+.sched td.done .time{color:var(--dim)}
+.refresh{border:1px solid var(--line2);background:var(--panel);color:var(--muted);font:inherit;font-size:12.5px;font-weight:700;border-radius:999px;padding:4px 12px;cursor:pointer}
+
+/* ===== 관리자 ===== */
+.lock{background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:22px 18px;text-align:center}
+.lock p{margin:0 0 14px;color:var(--muted);font-size:14.5px}
+.lock input{width:160px;font:inherit;font-size:24px;font-weight:900;letter-spacing:.3em;text-align:center;padding:10px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:#fff}
+.lock input:focus{outline:2px solid var(--men)}
+.btn{border:0;font:inherit;font-weight:900;border-radius:10px;padding:10px 16px;cursor:pointer;background:#fff;color:var(--pitch)}
+.btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}
+.btn.sm{padding:7px 12px;font-size:13px;border-radius:8px}
+.btn:focus-visible{outline:2px solid var(--men)}
+.err{color:#ffb4b4;font-size:13.5px;margin:10px 0 0;min-height:1.3em}
+.modebar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:10px 14px;font-size:13.5px;color:var(--muted);margin-bottom:6px}
+.modebar b{color:#fff}
+.adm{display:grid;gap:10px}
+.adm .m{background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:12px 14px}
+.adm .m.saved{border-color:rgba(255,255,255,.3)}
+.adm .head{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--dim);font-weight:700;margin-bottom:8px}
+.adm .head .st{font-weight:700}
+.adm .head .st.ok{color:#9be3a8}
+.adm .head .st.err{color:#ffb4b4}
+.adm .score{display:grid;grid-template-columns:1fr 54px 18px 54px 1fr;align-items:center;gap:6px}
+.adm .score .nm{font-weight:900;font-size:14px;line-height:1.2}
+.adm .score .nm:first-child{text-align:right}
+.adm .score .colon{text-align:center;color:var(--dim);font-weight:900}
+.adm input.sc{width:100%;font:inherit;font-size:22px;font-weight:900;text-align:center;padding:6px 0;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.35);color:#fff}
+.adm input.sc:focus{outline:2px solid var(--men)}
+.adm .goals{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.adm input.gl{width:100%;font:inherit;font-size:13px;padding:8px 10px;border-radius:9px;border:1px solid var(--line2);background:rgba(0,0,0,.25);color:#fff}
+.adm input.gl::placeholder{color:var(--dim)}
+.adm input.gl:focus{outline:2px solid var(--men)}
+.adm .act{display:flex;justify-content:flex-end;gap:6px;margin-top:8px}
+.adm .m.dirty .act .btn.save{background:var(--men);color:var(--men-ink)}
+.women .adm .m.dirty .act .btn.save{background:var(--women);color:var(--women-ink)}
 @media (prefers-reduced-motion:reduce){.screen.on{animation:none}.rules summary::after{transition:none}}
 </style>
 </head>
@@ -235,23 +276,8 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     </ul>
     <p class="note">조 번호는 천막 번호와 다릅니다.</p>
 
-    <h3 class="cat">경기 일정 · 축구장 · 경기당 40분</h3>
-    <table class="sched">
-      <thead><tr><th>시간</th><th>대진</th></tr></thead>
-      <tbody>
-        <tr data-s="08:00" data-e="08:40"><td class="time">08:00~08:40</td><td><div class="vs"><span><b>1</b>NO.1 FC</span><i>vs</i><span><b>2</b>GPS</span></div></td></tr>
-        <tr data-s="08:40" data-e="09:20"><td class="time">08:40~09:20</td><td><div class="vs"><span><b>3</b>강서 FC</span><i>vs</i><span><b>4</b>FC 조커</span></div></td></tr>
-        <tr data-s="09:20" data-e="10:00"><td class="time">09:20~10:00</td><td><div class="vs"><span><b>1</b>NO.1 FC</span><i>vs</i><span><b>5</b>FC 친선</span></div></td></tr>
-        <tr data-s="10:00" data-e="10:40"><td class="time">10:00~10:40</td><td><div class="vs"><span><b>2</b>GPS</span><i>vs</i><span><b>3</b>강서 FC</span></div></td></tr>
-        <tr data-s="10:40" data-e="11:20"><td class="time">10:40~11:20</td><td><div class="vs"><span><b>4</b>FC 조커</span><i>vs</i><span><b>5</b>FC 친선</span></div></td></tr>
-        <tr data-s="11:20" data-e="12:00"><td class="time">11:20~12:00</td><td><div class="vs"><span><b>1</b>NO.1 FC</span><i>vs</i><span><b>3</b>강서 FC</span></div></td></tr>
-        <tr class="break"><td colspan="2">12:00~12:30 자율 점심시간</td></tr>
-        <tr data-s="12:30" data-e="13:10"><td class="time">12:30~13:10</td><td><div class="vs"><span><b>2</b>GPS</span><i>vs</i><span><b>4</b>FC 조커</span></div></td></tr>
-        <tr data-s="13:10" data-e="13:50"><td class="time">13:10~13:50</td><td><div class="vs"><span><b>3</b>강서 FC</span><i>vs</i><span><b>5</b>FC 친선</span></div></td></tr>
-        <tr data-s="13:50" data-e="14:30"><td class="time">13:50~14:30</td><td><div class="vs"><span><b>1</b>NO.1 FC</span><i>vs</i><span><b>4</b>FC 조커</span></div></td></tr>
-        <tr data-s="14:30" data-e="15:10"><td class="time">14:30~15:10</td><td><div class="vs"><span><b>2</b>GPS</span><i>vs</i><span><b>5</b>FC 친선</span></div></td></tr>
-      </tbody>
-    </table>
+    <h3 class="cat" style="display:flex;justify-content:space-between;align-items:center"><span>경기 일정 · 축구장 · 경기당 40분</span><button class="refresh" data-refresh>결과 새로고침</button></h3>
+    <div class="sched-wrap" data-g="men"></div>
   </div>
 
   <div class="only-women women">
@@ -265,25 +291,10 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     </ul>
     <p class="note">조 번호는 천막 번호와 다릅니다.</p>
 
-    <h3 class="cat">경기 일정 · A풋살장 · 경기당 40분</h3>
-    <table class="sched">
-      <thead><tr><th>시간</th><th>대진</th></tr></thead>
-      <tbody>
-        <tr data-s="08:00" data-e="08:40"><td class="time">08:00~08:40</td><td><div class="vs"><span><b>1</b>FC 강남걸스</span><i>vs</i><span><b>2</b>관악엔젤스</span></div></td></tr>
-        <tr data-s="08:40" data-e="09:20"><td class="time">08:40~09:20</td><td><div class="vs"><span><b>3</b>바나나킥</span><i>vs</i><span><b>4</b>FC 팬텀</span></div></td></tr>
-        <tr data-s="09:20" data-e="10:00"><td class="time">09:20~10:00</td><td><div class="vs"><span><b>1</b>FC 강남걸스</span><i>vs</i><span><b>5</b>강서 WFC</span></div></td></tr>
-        <tr data-s="10:00" data-e="10:40"><td class="time">10:00~10:40</td><td><div class="vs"><span><b>2</b>관악엔젤스</span><i>vs</i><span><b>3</b>바나나킥</span></div></td></tr>
-        <tr data-s="10:40" data-e="11:20"><td class="time">10:40~11:20</td><td><div class="vs"><span><b>4</b>FC 팬텀</span><i>vs</i><span><b>5</b>강서 WFC</span></div></td></tr>
-        <tr data-s="11:20" data-e="12:00"><td class="time">11:20~12:00</td><td><div class="vs"><span><b>1</b>FC 강남걸스</span><i>vs</i><span><b>3</b>바나나킥</span></div></td></tr>
-        <tr class="break"><td colspan="2">12:00~12:30 자율 점심시간</td></tr>
-        <tr data-s="12:30" data-e="13:10"><td class="time">12:30~13:10</td><td><div class="vs"><span><b>2</b>관악엔젤스</span><i>vs</i><span><b>4</b>FC 팬텀</span></div></td></tr>
-        <tr data-s="13:10" data-e="13:50"><td class="time">13:10~13:50</td><td><div class="vs"><span><b>3</b>바나나킥</span><i>vs</i><span><b>5</b>강서 WFC</span></div></td></tr>
-        <tr data-s="13:50" data-e="14:30"><td class="time">13:50~14:30</td><td><div class="vs"><span><b>1</b>FC 강남걸스</span><i>vs</i><span><b>4</b>FC 팬텀</span></div></td></tr>
-        <tr data-s="14:30" data-e="15:10"><td class="time">14:30~15:10</td><td><div class="vs"><span><b>2</b>관악엔젤스</span><i>vs</i><span><b>5</b>강서 WFC</span></div></td></tr>
-      </tbody>
-    </table>
+    <h3 class="cat" style="display:flex;justify-content:space-between;align-items:center"><span>경기 일정 · A풋살장 · 경기당 40분</span><button class="refresh" data-refresh>결과 새로고침</button></h3>
+    <div class="sched-wrap" data-g="women"></div>
   </div>
-  <p class="note">경기 당일에는 진행 중인 경기가 표에서 강조됩니다.</p>
+  <p class="note" id="schedNote">경기 결과는 입력되는 대로 표에 표시됩니다. 경기 당일에는 진행 중인 경기가 강조됩니다.</p>
 </section>
 
 <!-- ================= 천막 ================= -->
@@ -448,6 +459,23 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
   <footer>서울특별시사회복지사협회 회원조직팀</footer>
 </section>
 
+<!-- ================= 관리자 (비공개) ================= -->
+<section class="screen" id="admin" data-title="경기 결과 입력 (운영진)">
+  <div id="adminLock" class="lock" style="margin-top:22px">
+    <p>운영진 전용 화면입니다. 관리자 PIN을 입력하세요.</p>
+    <input id="pinInput" type="password" inputmode="numeric" autocomplete="off" maxlength="12" aria-label="관리자 PIN">
+    <div style="margin-top:12px"><button class="btn" id="pinBtn">들어가기</button> <button class="btn ghost" data-go="home">홈으로</button></div>
+    <p class="err" id="pinErr"></p>
+  </div>
+  <div id="adminPanel" hidden>
+    <h3 class="cat" style="display:flex;justify-content:space-between;align-items:center"><span>경기 결과 입력</span><button class="btn ghost sm" id="logoutBtn">잠그기</button></h3>
+    <div class="modebar" id="modebar"></div>
+    <p class="note" style="margin:0 0 12px">점수를 입력하고 저장하면 선수용 일정표에 바로 표시됩니다. 득점자는 자유롭게 적으세요(예: 홍길동 2, 김철수). 점수를 비우고 저장하면 결과가 지워집니다.</p>
+    <div class="only-men men"><div class="adm" data-g="men"></div></div>
+    <div class="only-women women"><div class="adm" data-g="women"></div></div>
+  </div>
+</section>
+
 </main>
 
 <div class="tabbar">
@@ -463,68 +491,213 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
 </div>
 <script>
 (function(){
-  var SCREENS=['home','schedule','tent','access','info'];
-  var seg=document.querySelectorAll('.seg button');
-  var navBtns=document.querySelectorAll('.tabbar button');
-  var goBtns=document.querySelectorAll('[data-go]');
-  var titleEl=document.getElementById('screenTitle');
+  /* ====================== 설정 ====================== */
+  // 공유 저장(Supabase)을 쓰려면 아래 두 값을 채우세요. 비워 두면 "이 기기에만 저장" 모드로 동작합니다.
+  var SUPABASE_URL = '';          // 예: https://xxxxxxxx.supabase.co
+  var SUPABASE_ANON_KEY = '';     // Supabase 프로젝트의 anon public key
+  var LOCAL_ADMIN_PIN = '1017';   // 기기 저장 모드에서만 쓰는 PIN (Supabase 모드에서는 DB의 admin_config.pin 사용)
+
+  /* ====================== 경기 데이터 ====================== */
+  var MATCHES = [
+    {id:'m01',g:'men',  s:'08:00',e:'08:40',h:['1','NO.1 FC'],  a:['2','GPS']},
+    {id:'m02',g:'men',  s:'08:40',e:'09:20',h:['3','강서 FC'],   a:['4','FC 조커']},
+    {id:'m03',g:'men',  s:'09:20',e:'10:00',h:['1','NO.1 FC'],  a:['5','FC 친선']},
+    {id:'m04',g:'men',  s:'10:00',e:'10:40',h:['2','GPS'],      a:['3','강서 FC']},
+    {id:'m05',g:'men',  s:'10:40',e:'11:20',h:['4','FC 조커'],   a:['5','FC 친선']},
+    {id:'m06',g:'men',  s:'11:20',e:'12:00',h:['1','NO.1 FC'],  a:['3','강서 FC'], brk:true},
+    {id:'m07',g:'men',  s:'12:30',e:'13:10',h:['2','GPS'],      a:['4','FC 조커']},
+    {id:'m08',g:'men',  s:'13:10',e:'13:50',h:['3','강서 FC'],   a:['5','FC 친선']},
+    {id:'m09',g:'men',  s:'13:50',e:'14:30',h:['1','NO.1 FC'],  a:['4','FC 조커']},
+    {id:'m10',g:'men',  s:'14:30',e:'15:10',h:['2','GPS'],      a:['5','FC 친선']},
+    {id:'w01',g:'women',s:'08:00',e:'08:40',h:['1','FC 강남걸스'],a:['2','관악엔젤스']},
+    {id:'w02',g:'women',s:'08:40',e:'09:20',h:['3','바나나킥'],   a:['4','FC 팬텀']},
+    {id:'w03',g:'women',s:'09:20',e:'10:00',h:['1','FC 강남걸스'],a:['5','강서 WFC']},
+    {id:'w04',g:'women',s:'10:00',e:'10:40',h:['2','관악엔젤스'],  a:['3','바나나킥']},
+    {id:'w05',g:'women',s:'10:40',e:'11:20',h:['4','FC 팬텀'],    a:['5','강서 WFC']},
+    {id:'w06',g:'women',s:'11:20',e:'12:00',h:['1','FC 강남걸스'],a:['3','바나나킥'], brk:true},
+    {id:'w07',g:'women',s:'12:30',e:'13:10',h:['2','관악엔젤스'],  a:['4','FC 팬텀']},
+    {id:'w08',g:'women',s:'13:10',e:'13:50',h:['3','바나나킥'],   a:['5','강서 WFC']},
+    {id:'w09',g:'women',s:'13:50',e:'14:30',h:['1','FC 강남걸스'],a:['4','FC 팬텀']},
+    {id:'w10',g:'women',s:'14:30',e:'15:10',h:['2','관악엔젤스'],  a:['5','강서 WFC']}
+  ];
+  var scores = {}; // id -> {hs,as,hg,ag}
 
   function store(k,v){try{localStorage.setItem(k,v);}catch(e){}}
   function load(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  /* ====================== 저장소 (기기 / Supabase) ====================== */
+  var Store = {
+    mode: SUPABASE_URL ? 'cloud' : 'local',
+    hdr: function(){ return {'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json'}; },
+    loadAll: function(){
+      if(this.mode==='local'){
+        try{ return Promise.resolve(JSON.parse(load('sasw-scores')||'{}')); }catch(e){ return Promise.resolve({}); }
+      }
+      return fetch(SUPABASE_URL+'/rest/v1/scores?select=match_id,home_score,away_score,home_scorers,away_scorers',{headers:this.hdr()})
+        .then(function(r){ if(!r.ok) throw new Error('불러오기 실패 ('+r.status+')'); return r.json(); })
+        .then(function(rows){ var m={}; rows.forEach(function(r){ if(r.home_score!=null) m[r.match_id]={hs:r.home_score,as:r.away_score,hg:r.home_scorers||'',ag:r.away_scorers||''}; }); return m; });
+    },
+    checkPin: function(pin){
+      if(this.mode==='local') return Promise.resolve(pin===LOCAL_ADMIN_PIN);
+      return fetch(SUPABASE_URL+'/rest/v1/rpc/check_pin',{method:'POST',headers:this.hdr(),body:JSON.stringify({p_pin:pin})})
+        .then(function(r){ return r.ok ? r.json() : false; }).then(function(v){ return v===true; });
+    },
+    save: function(pin,id,rec){ // rec null → 삭제
+      if(this.mode==='local'){
+        if(pin!==LOCAL_ADMIN_PIN) return Promise.reject(new Error('PIN이 맞지 않습니다'));
+        if(rec) scores[id]=rec; else delete scores[id];
+        store('sasw-scores',JSON.stringify(scores));
+        return Promise.resolve();
+      }
+      var body={p_pin:pin,p_match_id:id,p_home:rec?rec.hs:null,p_away:rec?rec.as:null,p_home_scorers:rec?rec.hg:null,p_away_scorers:rec?rec.ag:null};
+      return fetch(SUPABASE_URL+'/rest/v1/rpc/save_score',{method:'POST',headers:this.hdr(),body:JSON.stringify(body)})
+        .then(function(r){ if(!r.ok) return r.json().then(function(j){ throw new Error(j.message||('저장 실패 '+r.status)); }); if(rec) scores[id]=rec; else delete scores[id]; });
+    }
+  };
+
+  /* ====================== 선수용 일정표 렌더 ====================== */
+  function renderSched(){
+    document.querySelectorAll('.sched-wrap').forEach(function(wrap){
+      var g=wrap.dataset.g, rows='';
+      MATCHES.filter(function(m){return m.g===g;}).forEach(function(m){
+        var sc=scores[m.id];
+        var mid = sc ? '<i class="score">'+esc(sc.hs)+' : '+esc(sc.as)+'</i>' : '<i>vs</i>';
+        var goals = sc && (sc.hg||sc.ag) ? '<div class="scorers"><span>'+esc(sc.hg||'-')+'</span><span>'+esc(sc.ag||'-')+'</span></div>' : '';
+        rows += '<tr data-s="'+m.s+'" data-e="'+m.e+'"><td class="time">'+m.s+'~'+m.e+'</td><td'+(sc?' class="done"':'')+'><div class="vs"><span><b>'+m.h[0]+'</b>'+esc(m.h[1])+'</span>'+mid+'<span><b>'+m.a[0]+'</b>'+esc(m.a[1])+'</span></div>'+goals+'</td></tr>';
+        if(m.brk) rows += '<tr class="break"><td colspan="2">12:00~12:30 자율 점심시간</td></tr>';
+      });
+      wrap.innerHTML='<table class="sched"><thead><tr><th>시간</th><th>대진 · 결과</th></tr></thead><tbody>'+rows+'</tbody></table>';
+    });
+    markNow();
+  }
+  function refreshScores(quiet){
+    return Store.loadAll().then(function(m){ scores=m; renderSched(); if(adminOpen) renderAdmin(); })
+      .catch(function(e){ if(!quiet) alert(e.message); });
+  }
+
+  /* ====================== 관리자 ====================== */
+  var adminOpen=false, adminPin=null;
+  var lock=document.getElementById('adminLock'), panel=document.getElementById('adminPanel');
+  var pinInput=document.getElementById('pinInput'), pinErr=document.getElementById('pinErr');
+
+  function openAdmin(){
+    adminPin = sessionStorage.getItem('sasw-admin-pin');
+    if(adminPin){ unlock(); } else { lock.hidden=false; panel.hidden=true; adminOpen=false; setTimeout(function(){pinInput.focus();},50); }
+  }
+  function unlock(){
+    lock.hidden=true; panel.hidden=false; adminOpen=true;
+    document.getElementById('modebar').innerHTML = Store.mode==='cloud'
+      ? '<span>저장 방식: <b>공유 DB(Supabase)</b> · 모든 기기에서 같은 결과가 보입니다</span>'
+      : '<span>저장 방식: <b>이 기기에만 저장</b> · 다른 기기에서는 결과가 보이지 않습니다</span>';
+    refreshScores(true).then(renderAdmin);
+  }
+  function tryPin(){
+    var pin=pinInput.value.trim(); pinErr.textContent='';
+    if(!pin){ pinErr.textContent='PIN을 입력하세요.'; return; }
+    Store.checkPin(pin).then(function(ok){
+      if(!ok){ pinErr.textContent='PIN이 맞지 않습니다.'; pinInput.select(); return; }
+      adminPin=pin; sessionStorage.setItem('sasw-admin-pin',pin); pinInput.value=''; unlock();
+    }).catch(function(){ pinErr.textContent='확인 중 오류가 났습니다. 네트워크를 확인하세요.'; });
+  }
+  document.getElementById('pinBtn').addEventListener('click',tryPin);
+  pinInput.addEventListener('keydown',function(e){ if(e.key==='Enter') tryPin(); });
+  document.getElementById('logoutBtn').addEventListener('click',function(){ sessionStorage.removeItem('sasw-admin-pin'); adminPin=null; adminOpen=false; go('home'); });
+
+  function renderAdmin(){
+    document.querySelectorAll('.adm').forEach(function(box){
+      var g=box.dataset.g, html='';
+      MATCHES.filter(function(m){return m.g===g;}).forEach(function(m){
+        var sc=scores[m.id]||{};
+        html += '<div class="m'+(scores[m.id]?' saved':'')+'" data-id="'+m.id+'">'
+          + '<div class="head"><span>'+m.s+'~'+m.e+' · '+(g==='men'?'축구장':'A풋살장')+'</span><span class="st">'+(scores[m.id]?'저장됨':'미입력')+'</span></div>'
+          + '<div class="score"><div class="nm">'+esc(m.h[1])+'</div><input class="sc" data-f="hs" type="number" inputmode="numeric" min="0" max="99" value="'+(sc.hs==null?'':sc.hs)+'" aria-label="'+esc(m.h[1])+' 점수"><div class="colon">:</div><input class="sc" data-f="as" type="number" inputmode="numeric" min="0" max="99" value="'+(sc.as==null?'':sc.as)+'" aria-label="'+esc(m.a[1])+' 점수"><div class="nm">'+esc(m.a[1])+'</div></div>'
+          + '<div class="goals"><input class="gl" data-f="hg" value="'+esc(sc.hg||'')+'" placeholder="'+esc(m.h[1])+' 득점자"><input class="gl" data-f="ag" value="'+esc(sc.ag||'')+'" placeholder="'+esc(m.a[1])+' 득점자"></div>'
+          + '<div class="act"><button class="btn ghost sm" data-act="clear">지우기</button><button class="btn sm save" data-act="save">저장</button></div>'
+          + '</div>';
+      });
+      box.innerHTML=html;
+    });
+  }
+  document.addEventListener('input',function(e){
+    var m=e.target.closest && e.target.closest('.adm .m'); if(m) m.classList.add('dirty');
+  });
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest && e.target.closest('.adm [data-act]'); if(!btn) return;
+    var m=btn.closest('.m'), id=m.dataset.id, st=m.querySelector('.st');
+    var rec=null;
+    if(btn.dataset.act==='save'){
+      var hs=m.querySelector('[data-f="hs"]').value.trim(), as=m.querySelector('[data-f="as"]').value.trim();
+      if(hs!==''||as!==''){
+        if(hs===''||as===''){ st.textContent='양쪽 점수를 모두 입력하세요'; st.className='st err'; return; }
+        rec={hs:parseInt(hs,10),as:parseInt(as,10),hg:m.querySelector('[data-f="hg"]').value.trim(),ag:m.querySelector('[data-f="ag"]').value.trim()};
+        if(isNaN(rec.hs)||isNaN(rec.as)||rec.hs<0||rec.as<0){ st.textContent='점수는 0 이상의 숫자'; st.className='st err'; return; }
+      }
+    } else {
+      if(!confirm('이 경기의 결과를 지울까요?')) return;
+      m.querySelectorAll('input').forEach(function(i){i.value='';});
+    }
+    st.textContent='저장 중…'; st.className='st';
+    Store.save(adminPin,id,rec).then(function(){
+      st.textContent = rec ? '저장됨' : '지움'; st.className='st ok'; m.classList.remove('dirty'); m.classList.toggle('saved',!!rec);
+      renderSched();
+    }).catch(function(err){ st.textContent=err.message; st.className='st err'; });
+  });
+
+  /* ====================== 화면 전환 ====================== */
+  var SCREENS=['home','schedule','tent','access','info','admin'];
+  var seg=document.querySelectorAll('.seg button');
+  var navBtns=document.querySelectorAll('.tabbar button');
+  var titleEl=document.getElementById('screenTitle');
+  var current='home';
 
   function setView(v){
     document.body.setAttribute('data-view',v);
     seg.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===v?'true':'false');});
-    store('sasw-view',v);
-    writeHash();
+    store('sasw-view',v); writeHash();
   }
-  var current='home';
   function go(id,scroll){
     if(SCREENS.indexOf(id)<0) id='home';
     current=id;
     document.querySelectorAll('.screen').forEach(function(s){s.classList.toggle('on',s.id===id);});
     navBtns.forEach(function(b){ if(b.dataset.go===id) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
-    var sec=document.getElementById(id);
-    titleEl.textContent=sec.dataset.title||'선수 안내';
+    titleEl.textContent=document.getElementById(id).dataset.title||'선수 안내';
     if(scroll!==false) window.scrollTo({top:0,behavior:'auto'});
-    store('sasw-screen',id);
+    if(id!=='admin') store('sasw-screen',id);
+    if(id==='admin') openAdmin();
+    if(id==='schedule') refreshScores(true);
     writeHash();
   }
-  function writeHash(){
-    var h='#'+current+'/'+document.body.getAttribute('data-view');
-    if(location.hash!==h) history.replaceState(null,'',h);
-  }
-  function readHash(){
-    var h=location.hash.replace('#','');
-    if(!h) return null;
-    var p=h.split('/');
-    return {screen:p[0], view:p[1]};
-  }
+  function writeHash(){ var h='#'+current+'/'+document.body.getAttribute('data-view'); if(location.hash!==h) history.replaceState(null,'',h); }
+  function readHash(){ var h=location.hash.replace('#',''); if(!h) return null; var p=h.split('/'); return {screen:p[0],view:p[1]}; }
 
   seg.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.t);});});
-  goBtns.forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
+  document.querySelectorAll('[data-refresh]').forEach(function(b){b.addEventListener('click',function(){ b.textContent='불러오는 중…'; refreshScores().then(function(){ b.textContent='결과 새로고침'; }); });});
   window.addEventListener('hashchange',function(){var r=readHash(); if(!r) return; if(r.view==='men'||r.view==='women') setView(r.view); if(r.screen) go(r.screen);});
 
-  // 초기 상태: 해시 > 저장값 > 기본
+  // 숨은 관리자 진입: 앱바 제목을 빠르게 5번 탭
+  (function(){ var n=0,t=0; document.querySelector('.appbar .ttl').addEventListener('click',function(){ var now=Date.now(); n=(now-t<700)?n+1:1; t=now; if(n>=5){n=0; go('admin');} }); })();
+
+  // 초기 상태
   var r=readHash();
-  var v=(r&&(r.view==='men'||r.view==='women'))?r.view:(load('sasw-view')||'men');
-  if(v!=='men'&&v!=='women') v='men';
+  var v=(r&&(r.view==='men'||r.view==='women'))?r.view:(load('sasw-view')||'men'); if(v!=='men'&&v!=='women') v='men';
   document.body.setAttribute('data-view',v);
   seg.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===v?'true':'false');});
+  renderSched();
   go((r&&r.screen)||load('sasw-screen')||'home',false);
+  refreshScores(true);
 
-  // 경기 당일 진행 중인 경기 강조 (10/17)
+  // 경기 당일 진행 중 경기 강조 + 주기적 결과 갱신
   function markNow(){
-    var n=new Date();
-    var isDay=n.getFullYear()===2026&&n.getMonth()===9&&n.getDate()===17;
-    var cur=n.getHours()*60+n.getMinutes();
+    var n=new Date(), isDay=n.getFullYear()===2026&&n.getMonth()===9&&n.getDate()===17, cur=n.getHours()*60+n.getMinutes();
     document.querySelectorAll('.sched tr[data-s]').forEach(function(tr){
-      var s=tr.dataset.s.split(':'),e=tr.dataset.e.split(':');
-      var sm=+s[0]*60+ +s[1], em=+e[0]*60+ +e[1];
+      var s=tr.dataset.s.split(':'),e=tr.dataset.e.split(':'); var sm=+s[0]*60+ +s[1], em=+e[0]*60+ +e[1];
       tr.classList.toggle('now', isDay && cur>=sm && cur<em);
     });
   }
-  markNow(); setInterval(markNow,30000);
+  setInterval(function(){ markNow(); if(current==='schedule' && !document.hidden) refreshScores(true); },60000);
+  document.addEventListener('visibilitychange',function(){ if(!document.hidden && current==='schedule') refreshScores(true); });
 })();
 </script>
 </body>
