@@ -292,7 +292,7 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     </ul>
     <p class="note">조 번호는 천막 번호와 다릅니다.</p>
 
-    <h3 class="cat" style="display:flex;justify-content:space-between;align-items:center"><span>경기 일정 · 축구장 · 경기당 40분</span><button class="refresh" data-refresh>결과 새로고침</button></h3>
+    <h3 class="cat">경기 일정 · 축구장 · 경기당 40분</h3>
     <div class="sched-wrap" data-g="men"></div>
   </div>
 
@@ -307,10 +307,10 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     </ul>
     <p class="note">조 번호는 천막 번호와 다릅니다.</p>
 
-    <h3 class="cat" style="display:flex;justify-content:space-between;align-items:center"><span>경기 일정 · A풋살장 · 경기당 40분</span><button class="refresh" data-refresh>결과 새로고침</button></h3>
+    <h3 class="cat">경기 일정 · A풋살장 · 경기당 40분</h3>
     <div class="sched-wrap" data-g="women"></div>
   </div>
-  <p class="note" id="schedNote">경기 결과는 입력되는 대로 표에 표시됩니다. 경기 당일에는 진행 중인 경기가 강조됩니다.</p>
+  <p class="note" id="schedNote">경기 당일에는 진행 중인 경기가 강조됩니다.</p>
 </section>
 
 <!-- ================= 천막 ================= -->
@@ -512,7 +512,7 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
   <div id="adminPanel" hidden>
     <h3 class="cat" style="display:flex;justify-content:space-between;align-items:center"><span>경기 결과 입력</span><button class="btn ghost sm" id="logoutBtn">잠그기</button></h3>
     <div class="modebar" id="modebar"></div>
-    <p class="note" style="margin:0 0 12px">점수를 입력하고 저장하면 선수용 일정표에 바로 표시됩니다. 득점자는 자유롭게 적으세요(예: 홍길동 2, 김철수). 점수를 비우고 저장하면 결과가 지워집니다.</p>
+    <p class="note" style="margin:0 0 12px">경기 결과는 운영진 기록용이며 선수용 화면에는 표시되지 않습니다. 득점자는 자유롭게 적으세요(예: 홍길동 2, 김철수). 점수를 비우고 저장하면 결과가 지워집니다.</p>
     <div class="only-men men"><div class="adm" data-g="men"></div></div>
     <div class="only-women women"><div class="adm" data-g="women"></div></div>
   </div>
@@ -573,11 +573,11 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
   var Store = {
     mode: SUPABASE_URL ? 'cloud' : 'local',
     hdr: function(){ return {'apikey':SUPABASE_ANON_KEY,'Authorization':'Bearer '+SUPABASE_ANON_KEY,'Content-Type':'application/json'}; },
-    loadAll: function(){
+    loadAll: function(pin){
       if(this.mode==='local'){
         try{ return Promise.resolve(JSON.parse(load('sasw-scores')||'{}')); }catch(e){ return Promise.resolve({}); }
       }
-      return fetch(SUPABASE_URL+'/rest/v1/scores?select=match_id,home_score,away_score,home_scorers,away_scorers',{headers:this.hdr()})
+      return fetch(SUPABASE_URL+'/rest/v1/rpc/get_scores',{method:'POST',headers:this.hdr(),body:JSON.stringify({p_pin:pin})})
         .then(function(r){ if(!r.ok) throw new Error('불러오기 실패 ('+r.status+')'); return r.json(); })
         .then(function(rows){ var m={}; rows.forEach(function(r){ if(r.home_score!=null) m[r.match_id]={hs:r.home_score,as:r.away_score,hg:r.home_scorers||'',ag:r.away_scorers||''}; }); return m; });
     },
@@ -604,18 +604,17 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     document.querySelectorAll('.sched-wrap').forEach(function(wrap){
       var g=wrap.dataset.g, rows='';
       MATCHES.filter(function(m){return m.g===g;}).forEach(function(m){
-        var sc=scores[m.id];
-        var mid = sc ? '<i class="score">'+esc(sc.hs)+' : '+esc(sc.as)+'</i>' : '<i>vs</i>';
-        var goals = sc && (sc.hg||sc.ag) ? '<div class="scorers"><span>'+esc(sc.hg||'-')+'</span><span>'+esc(sc.ag||'-')+'</span></div>' : '';
-        rows += '<tr data-s="'+m.s+'" data-e="'+m.e+'"><td class="time">'+m.s+'~'+m.e+'</td><td'+(sc?' class="done"':'')+'><div class="vs"><span><b>'+m.h[0]+'</b>'+esc(m.h[1])+'</span>'+mid+'<span><b>'+m.a[0]+'</b>'+esc(m.a[1])+'</span></div>'+goals+'</td></tr>';
+        var mid = '<i>vs</i>', goals = '';
+        rows += '<tr data-s="'+m.s+'" data-e="'+m.e+'"><td class="time">'+m.s+'~'+m.e+'</td><td><div class="vs"><span><b>'+m.h[0]+'</b>'+esc(m.h[1])+'</span>'+mid+'<span><b>'+m.a[0]+'</b>'+esc(m.a[1])+'</span></div>'+goals+'</td></tr>';
         if(m.brk) rows += '<tr class="break"><td colspan="2">12:00~12:30 자율 점심시간</td></tr>';
       });
-      wrap.innerHTML='<table class="sched"><thead><tr><th>시간</th><th>대진 · 결과</th></tr></thead><tbody>'+rows+'</tbody></table>';
+      wrap.innerHTML='<table class="sched"><thead><tr><th>시간</th><th>대진</th></tr></thead><tbody>'+rows+'</tbody></table>';
     });
     markNow();
   }
   function refreshScores(quiet){
-    return Store.loadAll().then(function(m){ scores=m; renderSched(); if(adminOpen) renderAdmin(); })
+    if(!adminOpen || !adminPin) return Promise.resolve();
+    return Store.loadAll(adminPin).then(function(m){ scores=m; if(adminOpen) renderAdmin(); })
       .catch(function(e){ if(!quiet) alert(e.message); });
   }
 
@@ -631,7 +630,7 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
   function unlock(){
     lock.hidden=true; panel.hidden=false; adminOpen=true;
     document.getElementById('modebar').innerHTML = Store.mode==='cloud'
-      ? '<span>저장 방식: <b>공유 DB(Supabase)</b> · 모든 기기에서 같은 결과가 보입니다</span>'
+      ? '<span>저장 방식: <b>공유 DB(Supabase)</b> · 운영진 기기끼리 결과가 공유됩니다</span>'
       : '<span>저장 방식: <b>이 기기에만 저장</b> · 다른 기기에서는 결과가 보이지 않습니다</span>';
     refreshScores(true).then(renderAdmin);
   }
@@ -708,7 +707,6 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     if(scroll!==false) window.scrollTo({top:0,behavior:'auto'});
     if(id!=='admin') store('sasw-screen',id);
     if(id==='admin') openAdmin();
-    if(id==='schedule') refreshScores(true);
     writeHash();
   }
   function writeHash(){ var h='#'+current+'/'+document.body.getAttribute('data-view'); if(location.hash!==h) history.replaceState(null,'',h); }
@@ -716,7 +714,6 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
 
   seg.forEach(function(b){b.addEventListener('click',function(){setView(b.dataset.t);});});
   document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){go(b.dataset.go);});});
-  document.querySelectorAll('[data-refresh]').forEach(function(b){b.addEventListener('click',function(){ b.textContent='불러오는 중…'; refreshScores().then(function(){ b.textContent='결과 새로고침'; }); });});
   window.addEventListener('hashchange',function(){var r=readHash(); if(!r) return; if(r.view==='men'||r.view==='women') setView(r.view); if(r.screen) go(r.screen);});
 
   // 관리자 진입: 안내 탭 하단 "서울특별시사회복지사협회 참여위원회"를 빠르게 3번 탭 (또는 주소 #admin)
@@ -733,9 +730,8 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
   seg.forEach(function(b){b.setAttribute('aria-selected',b.dataset.t===v?'true':'false');});
   renderSched();
   go((r&&r.screen)||load('sasw-screen')||'home',false);
-  refreshScores(true);
 
-  // 경기 당일 진행 중 경기 강조 + 주기적 결과 갱신
+  // 경기 당일 진행 중 경기 강조
   function markNow(){
     var n=new Date(), isDay=n.getFullYear()===2026&&n.getMonth()===9&&n.getDate()===17, cur=n.getHours()*60+n.getMinutes();
     document.querySelectorAll('.sched tr[data-s]').forEach(function(tr){
@@ -743,8 +739,7 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
       tr.classList.toggle('now', isDay && cur>=sm && cur<em);
     });
   }
-  setInterval(function(){ markNow(); if(current==='schedule' && !document.hidden) refreshScores(true); },60000);
-  document.addEventListener('visibilitychange',function(){ if(!document.hidden && current==='schedule') refreshScores(true); });
+  setInterval(markNow,60000);
 })();
 </script>
 </body>
