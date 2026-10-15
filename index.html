@@ -185,6 +185,15 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
 .cf-foot{margin-top:12px;background:#fff;color:var(--pitch);border-radius:12px;padding:12px 16px;font-weight:900;text-align:center;font-size:15px}
 @media (max-width:360px){.menu{grid-template-columns:1fr}}
 
+/* ===== 사진 공유 ===== */
+.photo-cta{display:flex;align-items:center;gap:14px;background:#ffd23f;color:#14301f;border-radius:14px;padding:14px 16px;text-decoration:none;margin:0}
+.photo-cta svg{width:34px;height:30px;flex:none}
+.photo-cta .tx{flex:1;min-width:0}
+.photo-cta b{display:block;font-size:16px;font-weight:900;line-height:1.3}
+.photo-cta small{display:block;font-size:13px;font-weight:700;opacity:.8;margin-top:2px}
+.photo-cta .go{font-size:13px;font-weight:900;background:#14301f;color:#fff;border-radius:999px;padding:7px 12px;white-space:nowrap}
+.photo-cta:focus-visible{outline:3px solid #fff;outline-offset:2px}
+
 /* ===== 점수 표시 ===== */
 .sched .vs i.score{color:#fff;font-weight:900;font-size:15px;background:rgba(255,255,255,.12);border-radius:7px;padding:1px 8px;letter-spacing:.02em}
 .sched .scorers{margin-top:5px;font-size:12.5px;color:var(--muted);display:grid;grid-template-columns:1fr 1fr;gap:4px 10px}
@@ -265,6 +274,13 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     <button data-go="coffee"><svg viewBox="0 0 24 24"><path d="M4 8h12v6a4 4 0 01-4 4H8a4 4 0 01-4-4V8z"/><path d="M16 9h2a2 2 0 010 4h-2M6 21h10M8 4v2M11 3v3M14 4v2"/></svg>커피차</button>
     <button data-go="info"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>안내</button>
   </div>
+
+  <h3 class="cat">사진 공유</h3>
+  <a class="photo-cta" href="https://photos.app.goo.gl/ryy1JfHHF6fC2HRX8" target="_blank" rel="noopener">
+    <svg viewBox="0 0 48 40" aria-hidden="true"><path d="M6 10h9l4-6h10l4 6h9a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V14a4 4 0 0 1 4-4z" fill="#14301f"/><circle cx="24" cy="23" r="9" fill="#ffd23f"/><circle cx="24" cy="23" r="4.5" fill="#14301f"/></svg>
+    <span class="tx"><b>오늘의 추억을 공유해주세요</b><small>구글 포토 공유 앨범에 사진 올리기 · 보기</small></span>
+    <span class="go">앨범 열기</span>
+  </a>
 
   <h3 class="cat">당일 진행 순서</h3>
   <ol class="tl">
@@ -491,6 +507,11 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     <details><summary>구급용품은 운영본부에 있습니다</summary><div class="body">부상이나 몸 상태 이상이 있으면 경기를 멈추고 심판·운영본부에 바로 알려 주세요. 신가드 등 기본 보호장비를 꼭 착용해 주세요.</div></details>
     <details><summary>쓰레기는 관리사무소 옆 분리수거장에서 팀별로 처리해 주세요</summary><div class="body">일반·재활용·음식물을 꼭 분리해 주세요. 분리수거를 철저히 부탁드립니다.</div></details>
     <details class="nobody"><summary>우천 등 기상 상황에 따른 변경 사항은 별도로 안내드립니다</summary></details>
+  </div>
+
+  <h3 class="cat">사진 공유</h3>
+  <div class="rules">
+    <details open><summary>사진은 구글 포토 공유 앨범에 올려 주세요</summary><div class="body">오늘 찍은 사진을 공유 앨범에 올리면 함께 볼 수 있습니다. 앨범을 연 뒤 「사진 추가」를 누르고 사진을 골라 주세요(구글 계정 로그인 필요). 올라온 사진은 링크를 아는 누구나 볼 수 있습니다.<br><a href="https://photos.app.goo.gl/ryy1JfHHF6fC2HRX8" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;background:#ffd23f;color:#14301f;font-weight:900;text-decoration:none;border-radius:999px;padding:7px 14px">공유 앨범 열기</a></div></details>
   </div>
 
   <h3 class="cat">문의</h3>
