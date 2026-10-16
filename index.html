@@ -185,6 +185,14 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
 .cf-foot{margin-top:12px;background:#fff;color:var(--pitch);border-radius:12px;padding:12px 16px;font-weight:900;text-align:center;font-size:15px}
 @media (max-width:360px){.menu{grid-template-columns:1fr}}
 
+/* ===== 팀별 접수 ===== */
+.rcpt{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rcpt li{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:10px 14px}
+.rcpt time{font-weight:900;font-size:18px;font-variant-numeric:tabular-nums;border-radius:8px;padding:2px 8px;flex:none}
+.rcpt.men time{background:var(--men);color:var(--men-ink)} .rcpt.women time{background:var(--women);color:var(--women-ink)}
+.rcpt span{font-weight:900;font-size:15px;flex:1;min-width:0}
+.rcpt small{color:var(--dim);font-size:12.5px;white-space:nowrap}
+
 /* ===== 사진 공유 ===== */
 .photo-cta{display:flex;align-items:center;gap:14px;background:#ffd23f;color:#14301f;border-radius:14px;padding:14px 16px;text-decoration:none;margin:0}
 .photo-cta svg{width:34px;height:30px;flex:none}
@@ -256,7 +264,7 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
 <section class="screen on" id="home" data-title="선수 안내">
   <div class="hero">
     <h1>2026. 10. 17.(토)<br>강서개화축구장</h1>
-    <p class="when"><span>접수 07:30 ~</span><span>경기 08:00 ~ 15:10</span></p>
+    <p class="when"><span>경기 08:00 ~ 15:10</span><span>접수 각 팀 첫 경기 30분 전</span></p>
     <p class="where">인천 계양구 하야동 23-8 · 9호선 개화역 인근</p>
     <div class="facts">
       <div class="fact men"><b>남자축구 · 축구장</b><span>11인 출전 · 5팀 풀리그</span></div>
@@ -282,11 +290,23 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
     <span class="go">앨범 열기</span>
   </a>
 
+  <h3 class="cat">팀별 접수 시간 · 첫 경기 30분 전</h3>
+  <div class="only-men"><ul class="rcpt men">
+    <li><time>07:30</time><span>NO.1 FC · GPS</span><small>첫 경기 08:00</small></li>
+    <li><time>08:10</time><span>강서 FC · FC 조커</span><small>첫 경기 08:40</small></li>
+    <li><time>08:50</time><span>FC 친선</span><small>첫 경기 09:20</small></li>
+  </ul></div>
+  <div class="only-women"><ul class="rcpt women">
+    <li><time>07:30</time><span>FC 강남걸스 · 관악엔젤스</span><small>첫 경기 08:00</small></li>
+    <li><time>08:10</time><span>바나나킥 · FC 팬텀</span><small>첫 경기 08:40</small></li>
+    <li><time>08:50</time><span>강서 WFC</span><small>첫 경기 09:20</small></li>
+  </ul></div>
+
   <h3 class="cat">당일 진행 순서</h3>
   <ol class="tl">
-    <li><time>07:30</time><div class="t">참가팀 접수 및 준비</div><div class="d">07:30~07:55 접수대에서 일괄 접수</div></li>
-    <li class="key"><time>07:55</time><div class="t">축구장 무대 앞 집결</div><div class="d warn">단체사진 촬영 및 인사말 · 별도 개회식 없음 · 07:55까지 모여 주세요</div></li>
+    <li><time>07:30</time><div class="t">팀별 접수 시작</div><div class="d">각 팀 첫 경기 30분 전 접수 (07:30 · 08:10 · 08:50)</div></li>
     <li><time>08:00</time><div class="t">오전 경기</div><div class="d">남녀 각 6경기 (~12:00)</div></li>
+    <li class="key"><time>09:15</time><div class="t">축구장 무대 앞 집결</div><div class="d">단체사진 촬영 및 인사말 · 별도 개회식 없음</div></li>
     <li><time>11:30</time><div class="t">커피차 운영</div><div class="d">~14:30 · 분리수거장 앞 · 티켓 1장당 음료 1잔</div></li>
     <li><time>12:00</time><div class="t">자율 점심시간</div><div class="d">~12:30 · 점심 식사는 제공되지 않습니다</div></li>
     <li><time>12:10</time><div class="t">이벤트 게임 (B풋살장)</div><div class="d">~13:00 · 응원단 중심(아동 우선) · 리프팅(제기차기) · 골대 맞추기</div></li>
@@ -484,7 +504,7 @@ body[data-view="women"] .tabbar button[aria-current="page"]::after{background:va
 <section class="screen" id="info" data-title="꼭 확인해 주세요">
   <h3 class="cat">출전·경기</h3>
   <div class="rules">
-    <details class="hot" open><summary>출전 자격은 협회 회원 확인으로 진행됩니다</summary><div class="body">2026년 서울협회 회비를 납부한 회원만 출전할 수 있습니다. 접수는 07:30~07:55 일괄 진행하며, 이후 도착한 선수는 경기담당자가 개별 확인합니다.</div></details>
+    <details class="hot" open><summary>출전 자격은 협회 회원 확인으로 진행됩니다</summary><div class="body">2026년 서울협회 회비를 납부한 회원만 출전할 수 있습니다. 접수는 각 팀 첫 경기 30분 전에 진행하며, 이후 도착한 선수는 경기담당자가 개별 확인합니다.</div></details>
     <details class="hot" open><summary>경기 전 팀 명단을 심판에게 보여 주세요</summary><div class="body">접수 때 「당일 확인」을 마친 팀 명단은 팀 대표가 보관합니다. 팀 대표가 「출전 여부」에 출전 선수를 체크한 뒤 경기 전 심판에게 제시하며, 당일 확인된 선수만 출전할 수 있습니다. 심판은 필요할 때 명단과 대조합니다.</div></details>
     <details class="hot" open><summary>사전 선수명단에 없는 선수는 당일 등록할 수 없습니다</summary><div class="body">출전은 사전에 제출된 최종 선수명단을 기준으로 확인합니다. 명단에 없는 선수는 당일 현장에서 등록·출전할 수 없습니다.</div></details>
     <details><summary>별도 시상은 없습니다</summary><div class="body">안전과 상호 존중을 우선하는 친선전입니다. 과도한 몸싸움과 위험한 플레이는 삼가 주세요.</div></details>
